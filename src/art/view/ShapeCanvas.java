@@ -21,7 +21,7 @@ import javax.swing.JPanel;
 import art.controller.ArtController;
 
 
-public class ShapeCanvas extends JPanel
+public class ShapeCanvas extends JPanel implements MouseMotionListener
 {
 
 	private ArrayList<Polygon> triangleList;
@@ -88,7 +88,31 @@ public class ShapeCanvas extends JPanel
 		current.fillRect(0, 0, canvasImage.getWidth(), canvasImage.getHeight());
 		updateImage();
 	}
-	
+	public void drawOnCanvas(int xPosition, int yPosition, int lineWidth)
+	{
+		Graphics2D current = canvasImage.createGraphics();
+		current.setPaint(randomColor());
+		current.setStroke(new BasicStroke(lineWidth));
+		
+		if (previousX == Integer.MIN_VALUE)
+		{
+			current.drawLine(xPosition, yPosition, xPosition, yPosition);
+		}
+		else
+		{
+			current.drawLine(previousX, previousY, xPosition, yPosition);
+		}
+		
+		previousX = xPosition;
+		previousY = yPosition;
+		updateImage();
+		
+	}
+	public void resetLine()
+	{
+		previousX = Integer.MIN_VALUE;
+		previousY = Interger.MIN_VALUE;
+	}
 	public void save()
 	{
 		try
@@ -111,6 +135,8 @@ public class ShapeCanvas extends JPanel
 		int green = (int) (Math.random() * 256);
 		int blue = (int) (Math.random() * 256);
 		int alpha = (int) (Math.random() * 256);
+		
+		return new Color(red, green, blue, alpha);
 	}
 	
 	private void updateImage()
@@ -152,6 +178,15 @@ public class ShapeCanvas extends JPanel
 	{
 		super.paintComponent(graphics);
 		graphics.drawImage(canvasImage,  0,  0, null);
+	}
+	
+	@Override
+	public void mouseDragged(MouseEvent e)
+	{}
+	
+	public void mouseMoved(MouseEvent e)
+	{}
+		
 	}
 	
 }
