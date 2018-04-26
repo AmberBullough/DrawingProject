@@ -15,7 +15,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import art.controller.ArtController;
-import art.view.ShapeCanvas;
+//import art.view.ShapeCanvas;
 
 public class ArtPanel extends JPanel
 {
@@ -28,7 +28,7 @@ public class ArtPanel extends JPanel
 	private ArtController app;
 	
 	private SpringLayout appLayout;
-	private ShapeCanvas Shapecanvas;
+	private ShapeCanvas canvas;
 	private JPanel buttonPanel;
 	private JPanel sliderPanel;
 	private JSlider scaleSlider;
@@ -55,12 +55,12 @@ public class ArtPanel extends JPanel
 		scaleSlider = new JSlider(MINIMUM_SCALE, MAXIMUM_SCALE);
 		edgeSlider = new JSlider(MINIMUM_EDGE, MAXIMUM_EDGE);
 		
-		Shapecanvas = new Shapecanvas(app);
-		appLayout.putConstraint(SpringLayout.NORTH, Shapecanvas, 10, SpringLayout.NORTH, this);
+		canvas = new ShapeCanvas(app);
+		appLayout.putConstraint(SpringLayout.NORTH, canvas, 10, SpringLayout.NORTH, this);
 		sliderPanel = new JPanel();
 		appLayout.putConstraint(SpringLayout.EAST, sliderPanel, -220, SpringLayout.EAST, this);
 		buttonPanel = new JPanel(new GridLayout(0,1));
-		appLayout.putConstraint(SpringLayout.WEST, Shapecanvas, 6, SpringLayout.EAST, buttonPanel);
+		appLayout.putConstraint(SpringLayout.WEST, canvas, 6, SpringLayout.EAST, buttonPanel);
 		appLayout.putConstraint(SpringLayout.SOUTH, sliderPanel, 0, SpringLayout.SOUTH, buttonPanel);
 		
 		triangleButton = new JButton("Add Triangle");
@@ -113,7 +113,7 @@ public class ArtPanel extends JPanel
 		this.setLayout(appLayout);
 		this.setBackground(Color.DARK_GRAY);
 		this.setPreferredSize(new Dimension(1024, 768));; //Used for display in WindowBuilder
-		this.add(Shapecanvas);
+		this.add(canvas);
 		
 		buttonPanel.setPreferredSize(new Dimension(200,450));
 		buttonPanel.add(triangleButton);
@@ -137,7 +137,7 @@ public class ArtPanel extends JPanel
 		
 	}
 	
-	private boolean coinFLip()
+	private boolean coinFlip()
 	{
 		return (int) (Math.random() * 2) == 0;
 	}
