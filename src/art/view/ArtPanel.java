@@ -15,7 +15,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import art.controller.ArtController;
-//import art.view.ShapeCanvas;
+import art.view.ShapeCanvas;
 
 public class ArtPanel extends JPanel
 {
@@ -179,7 +179,8 @@ public class ArtPanel extends JPanel
 			return currentRectangle;
 				
 		}
-		private Ellipse createEllipse()
+		
+		private Ellipse2D createEllipse()
 		{
 			Ellipse2D ellipse = new Ellipse2D.Double();
 			
@@ -206,7 +207,7 @@ public class ArtPanel extends JPanel
 		public void actionPerformed(ActionEvent click)
 		{
 			Rectangle rectangle = createRectangle();
-			Shapecanvas.addShape(rectangle);
+			canvas.addShape(rectangle);
 		}
 		
 		});
@@ -215,7 +216,7 @@ public class ArtPanel extends JPanel
 		public void actionPerformed(ActionEvent click)
 		{
 			Polygon triangle = createPolygon(3);
-			Shapecanvas.addShape(triangle);
+			canvas.addShape(triangle);
 		}
 		
 		});
@@ -224,16 +225,16 @@ public class ArtPanel extends JPanel
 			public void actionPerformed(ActionEvent click)
 			{
 				Ellipse2D ellipse = createEllipse();
-				Shapecanvas.addShape(ellipse);
+				canvas.addShape(ellipse);
 			}
 			
 			});
 		
-		clearButton.addActionListener(click -> Shapecanvas.clear());
+		clearButton.addActionListener(click -> canvas.clear());
 		
-		saveButton.addActionListener(click -> Shapecanvas.save());
+		saveButton.addActionListener(click -> canvas.save());
 		
-		colorButton.addActionListener(click -> Shapecanvas.changeBackground();
+		colorButton.addActionListener(click -> canvas.changeBackground();
 		
 		scaleSlider.addChangeListener(new ChangeListener()
 			{
